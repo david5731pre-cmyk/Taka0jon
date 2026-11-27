@@ -42,7 +42,11 @@ fun TakaOjonApp() {
 
     val rate = rateText.toDoubleOrNull() ?: 0.0
     val value = input.toDoubleOrNull() ?: 0.0
-    val result = if (mode == "taka") value / rate else value * rate
+ val result = when {
+    rate <= 0.0 -> 0.0
+    mode == "taka" -> value / rate
+    else -> value * rate
+ }
 
     MaterialTheme {
         Surface(Modifier.fillMaxSize(), color = Bg) {
